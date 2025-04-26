@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 function Cart({ visible, onClose, cart, setCart, handleChange}) {
-  // const {cart} = useContext(CartContext)
 
   const [price, setPrice] = useState(0);
 

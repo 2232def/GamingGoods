@@ -1,12 +1,12 @@
 export const fetchOwner = async () => {
     try {
-      const response = await fetch("http://localhost:8080/owners/profile", {
+      const res = await fetch("http://localhost:8080/owners/profile", {
         credentials: "include",
       });
   
-      if (!response.ok) {
+      if (!res.ok) {
         const errorData = await response.json();
-        throw new Error(`Server error: ${errorData.message} (status: ${response.status})`);
+        throw new Error(`Server error: ${errorData.message} (status: ${res.status})`);
       }
   
       const data = await response.json();

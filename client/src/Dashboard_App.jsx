@@ -9,7 +9,7 @@ import Product_view from "./components/Dashboards/Product_view";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Product_edit from "./components/Dashboards/Product_edit";
 
-function Dashboard_App({ owner, setOwner }) {
+function Dashboard_App({ owner, setOwner, producte ,setProducte}) {
   const {
     isUserProfile,
     isMyaccount,

@@ -32,7 +32,7 @@ function Popup({
       </div>
       <div className="w-[90vw] h-[80vh] bg-white fixed bottom-0 rounded-md translate-x-20 overscroll-auto">
         <div className="relative">
-          <button onClick={onClose} className="absolute top-[-3rem] right-8">
+          <button onClick={onClose} className="absolute top-[-3rem] left-0">
             X
           </button>
           <img
