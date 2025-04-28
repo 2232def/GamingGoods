@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { Circle } from "rc-progress";
 import Login_as_owner from "./Login_as_owner";
 
-function Signup_as_owner({setOwner}) {
+function Signup_as_owner({ setOwner }) {
   const [signupInfo, setSignupInfo] = useState({
     fullname: "",
     email: "",
@@ -38,7 +38,7 @@ function Signup_as_owner({setOwner}) {
           "Content-Type": "application/json",
         },
       });
-      
+
       const result = await response.json();
       console.log("Response status:", response.status);
       console.log("Response data:", result);
@@ -47,7 +47,9 @@ function Signup_as_owner({setOwner}) {
         handleSuccess("Owner account created successfully!");
         navigate("/Login_as_owner");
       } else {
-        handleError(typeof result === 'string' ? result : 'Failed to create owner account');
+        handleError(
+          typeof result === "string" ? result : "Failed to create owner account"
+        );
       }
     } catch (err) {
       console.error("Error during signup:", err);
@@ -149,7 +151,8 @@ function Signup_as_owner({setOwner}) {
                   Register & Continue
                 </button>
                 <p className="text-xl space-y-12">
-                  Already have an account? <Link to="/Login_as_owner">Login</Link>
+                  Already have an account?{" "}
+                  <Link to="/Login_as_owner">Login</Link>
                 </p>
               </label>
               {error && <p className="text-red-500">{error}</p>}

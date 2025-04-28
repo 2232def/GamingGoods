@@ -37,7 +37,7 @@ import { fetchProducts } from "../utils/fetchProducts";
 
 function Products() {
   // const [shows, setShows] = useState([]);
-  const[producte, setProducte] = useState([]);
+  const [producte, setProducte] = useState([]);
   const [cart, setCart] = useState([]);
   const [showData, setData] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -76,9 +76,9 @@ function Products() {
     setCart([...tempArr]);
   };
 
-  useEffect (() => {
+  useEffect(() => {
     fetchProducts(setProducte);
-  },[])
+  }, []);
   console.log("Products:", producte);
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Cart from "./Cart";
-
+import Signup_as_user from "./Signup_as_user";
 function Popup({
   visible,
   onClose,
@@ -14,13 +14,25 @@ function Popup({
 }) {
   if (!visible) return null;
 
+  const [showPopup, setShowPopup] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
+
+  const handleSignup = () => {
+    setShowSignup(true);
+    setShowPopup(true);
+  };
+  const handleOnClosePopup = () => {
+    setShowPopup(false);
+    setShowSignup(false);
+  };
+
   const [showCart, setShowCart] = useState(false);
   const handleOnClose = () => {
     setShowCart(false);
   };
 
   return (
-    <section className="w-full h-screen fixed top-0 left-0 backdrop-blur-sm">
+    <section className="w-full h-screen fixed top-0 left-0 backdrop-blur-sm ">
       <div>
         {warning && (
           <div className="flex justify-center items-center">
@@ -73,7 +85,10 @@ function Popup({
               >
                 Add to Cart
               </button>
-              <button className="bg-white w-[7rem] p-2 rounded-md border-2">
+              <button
+                className="bg-white w-[7rem] p-2 rounded-md border-2"
+                onClick={handleSignup}
+              >
                 Buy Now
               </button>
             </div>
@@ -87,6 +102,11 @@ function Popup({
         handleChange={handleChange}
         onClose={handleOnClose}
       />
+      {showPopup && (
+        <div className="z-4 absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+          <Signup_as_user onClose={handleOnClosePopup} />
+        </div>
+      )}
     </section>
   );
 }

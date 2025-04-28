@@ -17,3 +17,7 @@ bg-color
 panel-color
 text-color'
 
+userLogin only after clicking buy now button if not logined 
+if owner is loggedin then he dont need to logined as a user again
+logout options
+
