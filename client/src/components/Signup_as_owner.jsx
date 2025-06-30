@@ -45,7 +45,7 @@ function Signup_as_owner({ setOwner }) {
       setOwner(result);
       if (response.status === 201) {
         handleSuccess("Owner account created successfully!");
-        navigate("/Login_as_owner");
+        navigate("/Owner_dashboard/dashboard");
       } else {
         handleError(
           typeof result === "string" ? result : "Failed to create owner account"

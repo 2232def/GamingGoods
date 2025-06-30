@@ -3,7 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import Product_view_header from "./Product_view_header";
 import { fetchProducts } from "../../utils/fetchProducts";
 
-function Product_view({}) {
+function // In d:\Users\Lenovo\Downloads\GamingGoods\server\controllers\productController.js
+exports.getProductsByOwnerId = async (req, res) => {
+  try {
+    const { ownerId } = req.params;
+    const products = await Product.find({ ownerID: ownerId });
+    return res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products by owner:", error);
+    return res.status(500).json({ error: error.message });
+  }
+};Product_view({}) {
   const [producte, setProducte] = useState([]);
 
   const handleDelete = async (productId, setProducte) => {

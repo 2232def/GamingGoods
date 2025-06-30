@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === "development") {
 
       let owner = await ownerModel.findOne({ email: email });
       if (!owner) {
-        return res.send("Invalid email or password");
+        return res.status(401).json({ message: "Invalid email or password" });
       }
       bcrypt.compare(password, owner.password, function (err, result) {
         if (result) {
@@ -56,11 +56,11 @@ if (process.env.NODE_ENV === "development") {
             .status(201)
             .json({ message: "Owner created successfully" });
         } else {
-          return res.send("Invalid email or password");
+          return res.status(401).json({ message: "Invalid email or password" });
         }
       });
     } catch (err) {
-      return res.send(err.message);
+      return res.status(500).json({ message: err.message });
     }
   });
 }

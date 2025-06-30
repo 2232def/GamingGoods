@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { handleSuccess, handleError } from "../utils/toast";
 import { ToastContainer } from "react-toastify";
 
-function Login_as_owner({setOwner}) {
+function Login_as_owner({ setOwner }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -40,18 +40,19 @@ function Login_as_owner({setOwner}) {
       let result;
       if (contentType && contentType.indexOf("application/json") !== -1) {
         result = await response.json();
-        setOwner(result);
       } else {
         result = await response.text();
+        console.error("Unexpected response format:", result);
       }
 
       if (response.ok) {
+        setOwner(result);
         handleSuccess("You have successfully logged in!");
         // localStorage.setItem('token',token);
         navigate("/Owner_dashboard/dashboard");
       } else {
         handleError(
-          typeof result === "string" ? result : "Failed to create owner account"
+          typeof result === "string" ? result : "Failed to login owner account"
         );
       }
     } catch (err) {

@@ -34,16 +34,19 @@ function Signup_as_user({ onClose }) {
           "content-type": "application/json",
         },
       });
-      const result = await response.json();
-      console.log("Response data:", result);
-      console.log("Response status:", response.status);
-      if (response.status === 201) {
-        handleSuccess("User account created successfully!");
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Response data:", result);
+        handleSuccess("user account created successfully!");
         navigate("/Products");
       } else {
-        handleError(
-          typeof result === "string" ? result : "Failed to create user account"
-        );
+        const contentType = response.headers.get("content-type");
+        const errorMessage =
+          contentType && contentType.includes("application/json")
+            ? (await response.json()).message || "Failed to create user account"
+            : await response.text();
+        handleError(errorMessage);
       }
     } catch (err) {
       console.error("Error during signup:", err);
