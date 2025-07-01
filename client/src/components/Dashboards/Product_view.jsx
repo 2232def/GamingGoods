@@ -3,20 +3,21 @@ import { Link, useNavigate } from "react-router-dom";
 import Product_view_header from "./Product_view_header";
 import { fetchProducts } from "../../utils/fetchProducts";
 
-function // In d:\Users\Lenovo\Downloads\GamingGoods\server\controllers\productController.js
-exports.getProductsByOwnerId = async (req, res) => {
-  try {
-    const { ownerId } = req.params;
-    const products = await Product.find({ ownerID: ownerId });
-    return res.status(200).json(products);
-  } catch (error) {
-    console.error("Error fetching products by owner:", error);
-    return res.status(500).json({ error: error.message });
-  }
-};Product_view({}) {
+// function // In d:\Users\Lenovo\Downloads\GamingGoods\server\controllers\productController.js
+// exports.getProductsByOwnerId = async (req, res) => {
+//   try {
+//     const { ownerId } = req.params;
+//     const products = await Product.find({ ownerID: ownerId });
+//     return res.status(200).json(products);
+//   } catch (error) {
+//     console.error("Error fetching products by owner:", error);
+//     return res.status(500).json({ error: error.message });
+//   }
+// };
+function Product_view({}) {
   const [producte, setProducte] = useState([]);
 
-  const handleDelete = async (productId, setProducte) => {
+  const handleDelete = async (productId) => {
     try {
       const res = await fetch(
         `http://localhost:8080/product_route/products_delete/${productId}`,
@@ -25,6 +26,7 @@ exports.getProductsByOwnerId = async (req, res) => {
           credentials: "include",
         }
       );
+      console.log("Delete response:", res);
       if (!res.ok) {
         const errorRes = await res.json();
         console.error("Error deleting product:", errorRes);

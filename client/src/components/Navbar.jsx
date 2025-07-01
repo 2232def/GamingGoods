@@ -36,9 +36,9 @@ function Navbar() {
       >
         <div className="navbar-start ">
           <ul className="flex gap-46">
-            <div className="about bg-red-200" >
+            <div className="about bg-red-200">
               <NavLink className="mx-8 bg-red-200">
-                <span > About </span>
+                <span> About </span>
               </NavLink>
             </div>
             <NavLink to="/Newsletters">Blog</NavLink>
@@ -54,12 +54,17 @@ function Navbar() {
           </NavLink>
         </div>
         <div className="navbar-end ">
-          <ul className="flex  gap-46 cursor-pointer">
+          <ul className="flex  gap-20 cursor-pointer">
             <NavLink to="/Products" className="prod">
               <span> Products </span>
             </NavLink>
+            <NavLink to="/Signup/user" className="">
+              <img src="./src/assets/avatar.png" alt="" />
+              <span>User</span>
+            </NavLink>
             <NavLink to="/Signup" className="">
               <img src="./src/assets/avatar.png" alt="" />
+              <span>Admin</span>
             </NavLink>
           </ul>
         </div>
