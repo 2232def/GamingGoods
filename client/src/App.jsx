@@ -1,4 +1,4 @@
-import { React, useState,useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import "./App.css";
 import Home from "./Home";
 import Products from "./components/Products";
@@ -9,6 +9,7 @@ import Dashboard_App from "./Dashboard_App";
 import News_letter from "./components/newsletters/News_letter";
 import Login_as_owner from "./components/Login_as_owner";
 import { fetchProducts } from "./utils/fetchProducts";
+import Signup_as_user from "./components/signup_as_user";
 
 function App() {
   const location = useLocation();
@@ -18,7 +19,7 @@ function App() {
   return (
     <>
       <div className="">
-        {location.pathname !== "/Signup" &&
+        {location.pathname !== "/Signup" && location.pathname !== "/Signup/user" &&
           !location.pathname.startsWith("/Owner_dashboard") &&
           location.pathname !== "/Login_as_owner" &&
           location.pathname !== "/Newsletters" && <Navbar />}
@@ -29,6 +30,10 @@ function App() {
           <Route
             path="/Signup"
             element={<Signup_as_owner setOwner={setOwner} />}
+          />
+          <Route
+            path="/Signup/user"
+            element={<Signup_as_user />}
           />
           <Route
             path="/Owner_dashboard/*"
