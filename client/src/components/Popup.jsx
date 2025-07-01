@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Cart from "./Cart";
 import Signup_as_user from "./Signup_as_user";
+import { Navigate,useLocation, useNavigate } from "react-router-dom";
 function Popup({
   visible,
   onClose,
@@ -16,14 +17,20 @@ function Popup({
 
   const [showPopup, setShowPopup] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const location = useLocation();
+  const previousPath = location.pathname;
+  // const navigate = useNavigate();
 
   const handleSignup = () => {
     setShowSignup(true);
     setShowPopup(true);
+  window.history.pushState({}, "", "/signup/register");
   };
+
   const handleOnClosePopup = () => {
     setShowPopup(false);
     setShowSignup(false);
+  window.history.pushState({}, "", previousPath);
   };
 
   const [showCart, setShowCart] = useState(false);

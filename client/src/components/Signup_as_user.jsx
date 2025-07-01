@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { handleSuccess, handleError } from "../utils/toast";
 import { ToastContainer } from "react-toastify";
 
@@ -103,6 +103,9 @@ function Signup_as_user({ onClose }) {
               value={signupInfo.password}
             />
           </div>
+          <p className="text-xl space-y-12">
+            Already have an account? <Link to="/Login_as_user">Login</Link>
+          </p>
           <button className="p-5 bg-white h-full ">Register</button>
           {error && <p className="text-red-500">{error}</p>}
         </form>

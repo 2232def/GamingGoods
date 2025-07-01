@@ -24,12 +24,12 @@ module.exports.registerUser = async function (req, res) {
 
           let token = generateToken(user);
           res.cookie("token", token);
-          return res.send("User created successfully");
+          return res.status(201).json("User created successfully");
         }
       });
     });
   } catch (err) {
-    return res.send(err.message);
+    return res.status(500).json("Error occurred", err.message);
   }
 };
 
@@ -39,15 +39,15 @@ module.exports.loginUser = async function (req, res) {
 
   let user = await userModel.findOne({ email: email });
   if (!user) {
-    return res.send("Invalid email or password");
+    return res.status(401).json("Invalid email or password");
   }
   bcrypt.compare(password, user.password, function (err, result) {
     if (result) {
       let token = generateToken(user);
       res.cookie("token", token);
-      return res.send("You are logged in successfully");
+      return res.status(200).json("You are logged in successfully");
     } else {
-      return res.send("Invalid email or password");
+      return res.status(401).json("Invalid email or password");
     }
   });
 };

@@ -10,6 +10,7 @@ import News_letter from "./components/newsletters/News_letter";
 import Login_as_owner from "./components/Login_as_owner";
 import { fetchProducts } from "./utils/fetchProducts";
 import Signup_as_user from "./components/signup_as_user";
+import Login_as_user from "./components/Login_as_user";
 
 function App() {
   const location = useLocation();
@@ -19,8 +20,10 @@ function App() {
   return (
     <>
       <div className="">
-        {location.pathname !== "/Signup" && location.pathname !== "/Signup/user" &&
+        {location.pathname !== "/Signup" &&
+          location.pathname !== "/Signup/user" &&
           !location.pathname.startsWith("/Owner_dashboard") &&
+          location.pathname !== "/Login_as_user" &&
           location.pathname !== "/Login_as_owner" &&
           location.pathname !== "/Newsletters" && <Navbar />}
 
@@ -31,10 +34,7 @@ function App() {
             path="/Signup"
             element={<Signup_as_owner setOwner={setOwner} />}
           />
-          <Route
-            path="/Signup/user"
-            element={<Signup_as_user />}
-          />
+          <Route path="/Signup/user" element={<Signup_as_user />} />
           <Route
             path="/Owner_dashboard/*"
             element={<Dashboard_App owner={owner} setOwner={setOwner} />}
@@ -43,6 +43,7 @@ function App() {
             path="/Login_as_owner"
             element={<Login_as_owner setOwner={setOwner} />}
           />
+          <Route path="/Login_as_user" element={<Login_as_user />} />
           <Route path="/Newsletters" element={<News_letter />} />
         </Routes>
       </div>
