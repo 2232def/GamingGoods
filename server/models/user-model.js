@@ -12,6 +12,10 @@ const userSchema = mongoose.Schema({
         type: Array,
         default: []
     },
+    wishlist: {
+        type: Array,
+        default: []
+    },
     contact: Number,
     picture: String,  
 });

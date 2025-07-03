@@ -35,7 +35,6 @@ module.exports.registerUser = async function (req, res) {
 
 module.exports.loginUser = async function (req, res) {
   let { email, password } = req.body;
-  console.log("email");
 
   let user = await userModel.findOne({ email: email });
   if (!user) {

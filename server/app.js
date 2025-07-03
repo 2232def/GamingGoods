@@ -41,9 +41,6 @@ app.use('/owners', ownersRouter);
 app.use('/users', usersRouter);
 app.use('/product_route', productsRouter);
 app.use('/images_upload', imageRouter);
-app.get("/", function (req, res) {
-  res.send("hey it's working");
-});
 
 
 
