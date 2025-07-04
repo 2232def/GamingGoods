@@ -4,7 +4,7 @@ exports.addToCart = async (req, res) => {
   try {
     const { userId, productId, name, price, quantity } = req.body;
 
-    let cart = await cartSchema.findById({ userId });
+    let cart = await cartSchema.findOne({ userId });
     if (!cart) {
       cart = await cartSchema.create({ userId, items: [] });
     }
@@ -16,6 +16,11 @@ exports.addToCart = async (req, res) => {
     } else {
       cart.items.push({ productId, name, price, quantity }); // Add new item to cart
     }
+    await cart.save();
+    res.status(201).json({
+      message: "Item added to cart successfully",
+      cart: cart,
+    });
   } catch (error) {
     console.error("Error adding to cart:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -24,9 +29,7 @@ exports.addToCart = async (req, res) => {
 
 exports.getCart = async (req, res) => {
   try {
-    const cart = await cartSchema
-      .findOne({ userId: req.params.userId })
-      .populate("items.productId", "name price");
+    const cart = await cartSchema.findOne({ userId: req.params.userId });
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }

@@ -10,6 +10,7 @@ const ownersRouter = require('./routes/ownersRouter');
 const usersRouter = require('./routes/usersRouter');
 const productsRouter = require("./routes/productsRouter");
 const imageRouter = require("./routes/imageRouter");
+const cartRouter = require("./routes/cartRouter");
 
 require("dotenv").config()
 
@@ -41,7 +42,7 @@ app.use('/owners', ownersRouter);
 app.use('/users', usersRouter);
 app.use('/product_route', productsRouter);
 app.use('/images_upload', imageRouter);
-
+app.use('/cart',cartRouter)
 
 
 app.listen(8080)
