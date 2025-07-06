@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 function Cart({ visible, onClose, cart, setCart, handleChange}) {
 
   const [price, setPrice] = useState(0);
+  
 
   const handlePrice = () => {
     let ans = 0;
@@ -15,7 +16,6 @@ function Cart({ visible, onClose, cart, setCart, handleChange}) {
   const handleRemove = (id) => {
     const arr = cart.filter((item) => item.id !== id);
     setCart(arr);
-    //handlePrice();
   };
 
   useEffect(() => {
