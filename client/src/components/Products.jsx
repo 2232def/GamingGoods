@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Popup from "./Popup";
 import { fetchProducts } from "../utils/fetchProducts";
+import { useCart } from "../context/CartContext";
 
 // const items = [
 //   {
@@ -38,48 +39,58 @@ import { fetchProducts } from "../utils/fetchProducts";
 function Products() {
   // const [shows, setShows] = useState([]);
   const [producte, setProducte] = useState([]);
-  const [cart, setCart] = useState([]);
   const [showData, setData] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [warning, setWarning] = useState(false);
+  const { cart, addToCart, loading, error } = useCart();
 
   const handleOnClose = () => {
     setData(false);
   };
 
-  const handleClick = (item) => {
+  const handleClick = async (item) => {
     console.log(item);
     setSelectedItem(item);
-    let isPresent = false;
-    cart.forEach((product) => {
-      if (item.id === product.id) isPresent = true;
-    });
-    if (isPresent) {
+    // let isPresent = false;
+    // cart.forEach((product) => {
+    //   if (item.id === product.id) isPresent = true;
+    // });
+
+    // if (isPresent) {
+    //   setWarning(true);
+    //   setTimeout(() => {
+    //     setWarning(false);
+    //   }, 2000);
+    //   return;
+    // }
+    // setCart([...cart, item]);
+
+    const success = await addToCart(item);
+    if (!success) {
       setWarning(true);
       setTimeout(() => {
         setWarning(false);
       }, 2000);
-      return;
     }
-    setCart([...cart, item]);
   };
 
-  const handleChange = (item, d) => {
-    let ind = -1;
-    cart.forEach((data, index) => {
-      if (data.id === item.id) ind = index;
-    });
-    const tempArr = cart;
-    tempArr[ind].amount += d;
+  // const handleChange = (item, d) => {
+  //   let ind = -1;
+  //   cart.forEach((data, index) => {
+  //     if (data.id === item.id) ind = index;
+  //   });
+  //   const tempArr = cart;
+  //   tempArr[ind].amount += d;
 
-    if (tempArr[ind].amount === 0) tempArr[ind].amount = 1;
-    setCart([...tempArr]);
-  };
+  //   if (tempArr[ind].amount === 0) tempArr[ind].amount = 1;
+  //   setCart([...tempArr]);
+  // };
 
   useEffect(() => {
     fetchProducts(setProducte);
   }, []);
   console.log("Products:", producte);
+  
   return (
     <>
       <div className="w-full relative  bg-white flex">
@@ -172,8 +183,6 @@ function Products() {
             onClose={handleOnClose}
             warning={warning}
             cart={cart}
-            setCart={setCart}
-            handleChange={handleChange}
           />
         )}
       </div>
