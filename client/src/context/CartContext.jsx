@@ -1,4 +1,10 @@
-import React, { Children, useContext, createContext, useState ,useEffect} from "react";
+import React, {
+  Children,
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+} from "react";
 import {
   isUserLoggedIn,
   getLocalCart,
@@ -27,7 +33,8 @@ export const CartProvider = ({ children }) => {
 
         if (apiCart) {
           const transformedCart = apiCart.items.map((item) => ({
-            id: item.productId,
+            id: item.productId, // Ensure this is always set
+            _id: item.productId,
             name: item.name,
             price: item.price,
             amount: item.quantity,
@@ -54,7 +61,11 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (item) => {
     try {
-      const isPresent = cart.some((product) => product.id === item.id);
+      const itemId = item._id || item.id; // Ensure we use the correct ID field
+      const isPresent = cart.some((product) => {
+        const productId = product._id || product.id;
+        return productId === itemId;
+      });
 
       if (isPresent) {
         setError("Item already in cart");
@@ -64,7 +75,7 @@ export const CartProvider = ({ children }) => {
         return false;
       }
 
-      const newItem = { ...item, amount: 1 };
+      const newItem = { ...item, id: item._id || item.id, amount: 1 };
       const newCart = [...cart, newItem];
 
       if (isUserLoggedIn()) {

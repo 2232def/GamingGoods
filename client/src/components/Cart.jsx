@@ -57,14 +57,14 @@ function Cart({ visible, onClose }) {
           </div>
         )}
 
-        {cart.map((item) => {
+        {!loading && cart.map((item) => {
           {
             console.log(item);
           }
           return (
             <div
               className="Cart_box w-[38vw] flex border-2 border-red-300 bg-white p-3 items-center mt-7 rounded-lg p-5 mb-4"
-              key={item.id}
+              key={item._id}
             >
               <div className="Cart_img flex gap-7 items-center">
                 <img
@@ -72,7 +72,7 @@ function Cart({ visible, onClose }) {
                   className="size-[3.5rem] border-4 border-red-200 rounded-md"
                   alt=""
                 />
-                <p className="w-24">{item.name}</p>
+                <p className="w-24">{item.title}</p>
               </div>
               <div className="mx-24 flex gap-3">
                 <button onClick={() => updateQuantity(item, +1)}>+</button>

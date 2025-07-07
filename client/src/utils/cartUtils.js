@@ -53,15 +53,15 @@ export const addToCartAPI = async (product, quantity = 1) => {
   if (!userId) return false;
 
   try {
-    const response = await fetch("http://localhost:8000/cart/addtocart", {
+    const response = await fetch("http://localhost:8080/cart/addtocart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         userId,
-        productId: product.id,
-        name: product.name,
+        productId: product._id || product.id,
+        name: product.title || product.name,
         price: product.price,
         quantity,
       }),
@@ -84,7 +84,7 @@ export const fetchCartFromAPI = async () => {
   if (!userId) return null;
 
   try {
-    const response = await fetch(`http://localhost:8000/cart/cart/${userId}`, {
+    const response = await fetch(`http://localhost:8080/cart/cart/${userId}`, {
       credentials: "include",
     });
 
@@ -108,7 +108,7 @@ export const removeFromCartAPI = async (productId) => {
 
   try {
     const response = await fetch(
-      `http://localhost:8000/cart/remove/${userId}/${productId}`,
+      `http://localhost:8080/cart/remove/${userId}/${productId}`,
       {
         method: "DELETE",
         credentials: "include",

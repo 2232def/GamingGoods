@@ -31,11 +31,12 @@ function Signup_as_user({ onClose }) {
     try {
       const url = "http://localhost:8080/users/register";
       const response = await fetch(url, {
-        method: "Post",
+        method: "POST",
         body: JSON.stringify(signupInfo),
         headers: {
           "content-type": "application/json",
         },
+        credentials: "include", // Include cookies for session management
       });
 
       if (response.ok) {
