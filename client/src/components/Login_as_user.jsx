@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { handleSuccess, handleError } from "../utils/toast";
+import { mergeCartOnLogin } from "../utils/cartUtils";
 
 function Login_as_user() {
-
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -47,6 +47,7 @@ function Login_as_user() {
 
       if (response.ok) {
         handleSuccess("You have successfully logged in!");
+        await mergeCartOnLogin();
         // localStorage.setItem('token',token);
         navigate("/Products");
       } else {
@@ -58,7 +59,6 @@ function Login_as_user() {
       console.error("Error during signup:", err);
     }
   };
-
 
   return (
     <div className="flex justify-center h-[100vh] w-[100vw] items-center ">

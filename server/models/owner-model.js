@@ -9,10 +9,14 @@ const ownerSchema = mongoose.Schema({
   products: [
     {
       type: mongoose.Schema.Types.ObjectId,
+      required: true,
       ref: "product",
     },
   ],
-  gstin: String,
+  gstin: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("owner", ownerSchema);

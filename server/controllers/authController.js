@@ -2,6 +2,8 @@ const userModel = require("../models/user-model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { generateToken } = require("../utils/generateToken");
+const cartModel = require("../models/cart-model");
+
 
 module.exports.registerUser = async function (req, res) {
   try {
@@ -21,6 +23,14 @@ module.exports.registerUser = async function (req, res) {
             password: hash,
             fullname,
           });
+
+          let cart = await cartModel.create({
+            userId: user._id,
+            items:[]
+          });
+
+          user.cart = cart._id;
+          await user.save();
 
           let token = generateToken(user);
           res.cookie("token", token);
