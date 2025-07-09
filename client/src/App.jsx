@@ -11,6 +11,8 @@ import Login_as_owner from "./components/Login_as_owner";
 import { fetchProducts } from "./utils/fetchProducts";
 import Signup_as_user from "./components/signup_as_user";
 import Login_as_user from "./components/Login_as_user";
+import Wishlist from "./components/Wishlist";
+
 
 function App() {
   const location = useLocation();
@@ -30,6 +32,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/Products" element={<Products />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route
             path="/Signup"
             element={<Signup_as_owner setOwner={setOwner} />}

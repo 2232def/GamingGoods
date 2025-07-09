@@ -58,6 +58,9 @@ function Navbar() {
             <NavLink to="/Products" className="prod">
               <span> Products </span>
             </NavLink>
+            <NavLink to="/wishlist" className="wishlist">
+              <span>❤️ Wishlist </span>
+            </NavLink>
             <NavLink to="/Signup/user" className="">
               <img src="./src/assets/avatar.png" alt="" />
               <span>User</span>
