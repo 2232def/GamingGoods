@@ -15,15 +15,19 @@ exports.createProduct = async (req, res) => {
       return res.status(401).json({ error: "Invalid token" });
     }
 
-    const ownerId = decoded.id;
+    
+    const ownerId = decoded.id || decoded._id || decoded.userID;
+
+
     // res.json({decoded})
     if (!ownerId) {
       return res.status(401).json({ error: "Owner ID not provided" });
     }
 
     const owner = await Owner.findById(ownerId);
+
     if (!owner) {
-      return res.status(401).json({ error: "Invalid owner ID" });
+      return res.status(401).json({ error: "Invalid owner ID or owner not found" });
     }
 
     let imageData = null;
@@ -162,3 +166,6 @@ exports.getProductById = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+
+
