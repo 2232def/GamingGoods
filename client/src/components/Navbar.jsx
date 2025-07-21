@@ -113,7 +113,7 @@ function Navbar() {
                 My Account
               </button>
               {isAccountDropdownOpen && (
-                <div className="absolute right-0 top-full bg-white shadow-lg rounded-md mt-2 z-20 py-2 w-48 border">
+                <div className="absolute right-0 top-full bg-white shadow-lg rounded-md  z-20 py-2 w-48 border">
                   <NavLink to="/wishlist" className="block px-4 py-2 hover:bg-gray-100 transition-colors">
                     <span className="text-gray-700">❤️ Wishlist</span>
                   </NavLink>
