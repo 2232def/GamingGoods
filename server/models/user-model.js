@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+// const { default: Reviews } = require("../../client/src/components/Reviews");
 
 const userSchema = mongoose.Schema({
   fullname: String,
@@ -20,6 +21,13 @@ const userSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+      default: [],
+    },
+  ],
   contact: Number,
   picture: String,
 });
