@@ -1,6 +1,7 @@
 const Review = require("../models/review-model");
 const User = require("../models/user-model");
 const Product = require("../models/product-model");
+const { response } = require("express");
 
 module.exports.createReview = async (req, res) => {
   try {
@@ -137,7 +138,8 @@ module.exports.updateReview = async (req, res) => {
   try {
     const { reviewId } = req.params;
     const { rating, title, comment, images } = req.body;
-    const userId = req.user.id;
+    const userId =
+      req.user?._id?.toString() || req.body.userId || req.body.user;
 
     const review = await Review.findById(reviewId);
     if (!review) {
@@ -158,7 +160,7 @@ module.exports.updateReview = async (req, res) => {
     review.title = title || review.title;
     review.comment = comment || review.comment;
     review.images = images || review.images;
-    review.updatedAt = new Date();
+    // review.updatedAt = new Date();
 
     await review.save();
 
@@ -173,6 +175,53 @@ module.exports.updateReview = async (req, res) => {
     });
   } catch (err) {
     console.error("Update review error: ", err);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message,
+    });
+  }
+};
+
+module.exports.deleteReview = async (req, res) => {
+  try {
+    const { reviewId } = req.params;
+    const userId =
+      req.user?._id?.toString() || req.body.userId || req.body.user;
+
+    const review = await Review.findById(reviewId);
+    if (!review) {
+      return res.status(404).json({
+        success: false,
+        message: "Review not found",
+      });
+    }
+    if (review.user.toString() !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: "You can only delete your own reviews",
+      });
+    }
+
+    if (review.user.toString() !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: "You can only delete your own reviews",
+      });
+    }
+
+    await User.findByIdAndUpdate(userId, {
+      $pull: { reviews: reviewId },
+    });
+
+    await Review.findByIdAndDelete(reviewId);
+
+    res.status(200).json({
+      success: true,
+      message: "Review deleted successfully",
+    });
+  } catch (err) {
+    console.error("Delete review error: ", err);
     res.status(500).json({
       success: false,
       message: "Server error",
