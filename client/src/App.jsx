@@ -8,7 +8,6 @@ import Signup_as_owner from "./components/Signup_as_owner";
 import Dashboard_App from "./Dashboard_App";
 import News_letter from "./components/newsletters/News_letter";
 import Login_as_owner from "./components/Login_as_owner";
-import { fetchProducts } from "./utils/fetchProducts";
 import Signup_as_user from "./components/signup_as_user";
 import Login_as_user from "./components/Login_as_user";
 import Wishlist from "./components/Wishlist";

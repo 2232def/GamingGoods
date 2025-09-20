@@ -24,12 +24,12 @@ function Products() {
     mobileMenu: false,
   });
 
-  const { cart, addToCart, loading, error } = useCart();
+  const { cart, addToCart} = useCart();
 
-  const handleBtnClick = () => {
-    console.log("View Product clicked");
-    alert("View Product clicked");
-  };
+  // const handleBtnClick = () => {
+  //   console.log("View Product clicked");
+  //   alert("View Product clicked");
+  // };
 
   // Filter categories data
   const filterCategories = {
@@ -83,7 +83,7 @@ function Products() {
     setData(false);
   };
 
-  const handleClick = async (item) => {
+  const handleClick = async (e,item) => {
     console.log(item);
     setSelectedItem(item);
     const success = await addToCart(item);
